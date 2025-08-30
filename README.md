@@ -1,8 +1,9 @@
 # AWS Lambda GitHub Actions Function Deployment Demo
 
 It is now possible to automatically deploy AWS Lambda functions with GitHub Actions
-when code or configuration changes are pushed to a GitHub repository
-([link](https://aws.amazon.com/about-aws/whats-new/2025/08/aws-lambda-github-actions-function-deployment/)).
+when code or configuration changes are pushed to a GitHub repository.
+
+[AWS Lambda now supports GitHub Actions to simplify function deployment](https://aws.amazon.com/about-aws/whats-new/2025/08/aws-lambda-github-actions-function-deployment/)
 
 This feature eliminates the need for cumbersome steps such as custom scripts and packaging.
 
