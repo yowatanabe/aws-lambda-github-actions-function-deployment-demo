@@ -25,6 +25,3 @@ def handler(event, context):
                 {"ok": False, "message": f"Failed to access {url}", "error": str(e)}
             ),
         }
-
-
-# test
