@@ -1,0 +1,43 @@
+name: Deploy AWS Lambda
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+  workflow_dispatch: # Enable manual execution
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for OIDC authentication
+      contents: read  # Required to check out the repository
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+
+      - name: Install Lambda dependencies
+        working-directory: src
+        run: |
+          # Install dependencies
+          pip install -r requirements.txt --target .
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Deploy Lambda Function
+        uses: aws-actions/aws-lambda-deploy@v1
+        with:
+          function-name: sample-gha-lambda
+          code-artifacts-dir: ./src
+          handler: lambda_function.handler
+          runtime: python3.13
